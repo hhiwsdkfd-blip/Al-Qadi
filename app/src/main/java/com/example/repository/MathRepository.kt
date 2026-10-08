@@ -106,8 +106,12 @@ class MathRepository(private val context: Context) {
         // Progress stage 1: Reading
         onProgress(SolveProgress.ReadingQuestion)
 
-        val apiKey = BuildConfig.GEMINI_API_KEY
-        if (apiKey.isBlank() || apiKey == "MY_GEMINI_API_KEY") {
+        val apiKey = when {
+            BuildConfig.GEMINI_API_KEY.isNotBlank() && BuildConfig.GEMINI_API_KEY != "MY_GEMINI_API_KEY" -> BuildConfig.GEMINI_API_KEY
+            BuildConfig.GEMINI_API_KEY_FALLBACK.isNotBlank() -> BuildConfig.GEMINI_API_KEY_FALLBACK
+            else -> ""
+        }
+        if (apiKey.isBlank()) {
             val offlineFallback = generateFallbackSolution(rawQuestion)
             onProgress(SolveProgress.Success(offlineFallback))
             return@withContext offlineFallback

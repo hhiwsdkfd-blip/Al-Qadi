@@ -1,4 +1,5 @@
 import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
+import java.util.Properties
 
 plugins {
   alias(libs.plugins.android.application)
@@ -21,6 +22,15 @@ android {
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    val localPropsFile = rootProject.file("local.properties")
+    val localProps = Properties()
+    if (localPropsFile.exists()) {
+      localPropsFile.inputStream().use { localProps.load(it) }
+    }
+    val resolvedGeminiApiKey = System.getenv("GEMINI_API_KEY")
+      ?: (localProps.getProperty("GEMINI_API_KEY") ?: "")
+    buildConfigField("String", "GEMINI_API_KEY_FALLBACK", "\"$resolvedGeminiApiKey\"")
   }
 
   // Do not remove or modify these signingConfigs. They are necessary for building, installing,
@@ -57,8 +67,8 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
   buildFeatures {
     compose = true
