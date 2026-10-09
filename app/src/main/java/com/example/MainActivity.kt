@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Assignment
+import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Settings
@@ -81,7 +81,7 @@ class MainActivity : ComponentActivity() {
                                             restoreState = true
                                         }
                                     },
-                                    icon = { Icon(Icons.Default.Assignment, contentDescription = "الامتحان") },
+                                    icon = { Icon(Icons.AutoMirrored.Filled.Assignment, contentDescription = "الامتحان") },
                                     label = { Text("امتحان تجريبي") }
                                 )
                                 NavigationBarItem(
