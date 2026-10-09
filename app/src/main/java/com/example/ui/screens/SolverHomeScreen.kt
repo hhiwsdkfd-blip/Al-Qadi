@@ -33,8 +33,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.model.MathSolution
+import com.example.ui.components.AdvancedMathKeyboard
 import com.example.ui.components.MathSolutionWebView
-import com.example.ui.components.SymbolPalette
 import com.example.viewmodel.MathViewModel
 import com.example.viewmodel.UiState
 
@@ -271,8 +271,8 @@ fun SolverHomeScreen(
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    // Comprehensive Symbol Palette
-                    SymbolPalette(
+                    // Comprehensive Math Keyboard & Symbol Input
+                    AdvancedMathKeyboard(
                         textFieldValue = textInput,
                         onValueChange = {
                             textInput = it
